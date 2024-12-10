@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tipos de Cámaras de Seguridad</title>
+	<link rel="icon" href="https://as1.ftcdn.net/v2/jpg/00/18/46/50/1000_F_18465016_sezXZYxT7sjHEKA3CXOk8x0kkjyp2ncl.jpg" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #28a745;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            flex-wrap: nowrap;
+            margin: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .left {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+        }
+        .left img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .right {
+            flex: 2;
+            padding: 20px;
+        }
+        .right h2 {
+            color: #28a745;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+    <script>
+        function showInfo() {
+            const type = document.getElementById("cameraType").value;
+            const info = document.getElementById("info");
+            const image = document.getElementById("image");
+
+            // Datos para cada tipo de cámara
+            const cameras = {
+                hd: {
+                    img: "https://revistaseguridad360.com/wp-content/uploads/2024/10/1728847678.png",
+                    title: "Cámara HD",
+                    desc: "Cámaras de alta definición para calidad superior de imagen."
+                },
+                ip: {
+                    img: "https://http2.mlstatic.com/D_NQ_NP_895998-MLA49015915463_022022-O.webp",
+                    title: "Cámara IP",
+                    desc: "Acceso remoto a través de Internet y alta conectividad."
+                },
+                interiores: {
+                    img: "https://mejorescamarasdeseguridad.com/wp-content/uploads/2022/12/Mejores-camaras-de-seguridad-interior.webp",
+                    title: "Cámaras para Interiores",
+                    desc: "Diseñadas para espacios cerrados con excelente resolución."
+                },
+                movimiento: {
+                    img: "https://www.seguridaddigital.com.mx/prods/M360IRdet.png",
+                    title: "Cámaras con Movimiento y Zoom",
+                    desc: "Control remoto para capturar cualquier ángulo con detalle."
+                },
+                vision_nocturna: {
+                    img: "https://tiendaonline.yalecolombia.com/cdn/shop/products/camara-wifi-de-vigilancia-full-hd-vision-nocturna--3_1029x.jpg?v=1676412314",
+                    title: "Cámaras de Visión Nocturna",
+                    desc: "Perfectas para vigilancia en condiciones de poca luz."
+                },
+                analogicas: {
+                    img: "https://media.digitalife.com.mx/products/34367/60abfd5e04ba4.webp",
+                    title: "Cámaras Analógicas",
+                    desc: "Sistemas tradicionales y confiables de videovigilancia."
+                },
+                antivandalicas: {
+                    img: "https://telefoniatotal.com/wp-content/uploads/2020/06/Camara-Dahua-Domo_DH-HAC-HDBW3802E-Z.png",
+                    title: "Cámaras Antivandálicas",
+                    desc: "Diseño robusto para resistir impactos y sabotajes."
+                },
+                wifi: {
+                    img: "https://http2.mlstatic.com/D_NQ_NP_765332-MLU78132990716_082024-O.webp",
+                    title: "Cámaras Wifi o Inalámbricas",
+                    desc: "Instalación fácil sin necesidad de cables."
+                },
+                minidomo: {
+                    img: "https://hikvisioncolombia.com/wp-content/uploads/2023/05/DS-2CD3145G0-IS.jpg",
+                    title: "Cámara Minidomo",
+                    desc: "Compacta y discreta para espacios pequeños."
+                },
+                domo: {
+                    img: "https://fenixcomercial.com.co/wp-content/uploads/2020/04/ds-2cd1143g0-I1.png",
+                    title: "Cámara Domo",
+                    desc: "Diseño elegante, ideal para interiores y exteriores."
+                },
+                bala: {
+                    img: "https://hikvisioncolombia.com/wp-content/uploads/2019/03/DS2CD1021I.png",
+                    title: "Cámara Bala",
+                    desc: "Perfectas para monitoreo perimetral en exteriores."
+                },
+                cubo: {
+                    img: "https://fenixcomercial.com.co/wp-content/uploads/2020/10/DS-2CD2443G0-IW-2.8MM.png",
+                    title: "Cámara Cubo",
+                    desc: "Diseño minimalista ideal para hogares y oficinas."
+                },
+                ptz: {
+                    img: "https://lasus.com.co/149051-large_default/camara-ptz-2mp-con-zoom-optico-25x-y-seguimiento-automatico.jpg",
+                    title: "Cámara Domo PTZ",
+                    desc: "Capacidad de giro, inclinación y zoom profesional."
+                },
+                fija: {
+                    img: "https://www.ventasdeseguridad.com/images/stories/VDS/2021/Secolarm-ipcamera-web.jpg",
+                    title: "Cámara Fija o Profesional",
+                    desc: "Alta calidad para vigilancia en áreas específicas."
+                },
+                panoramica: {
+                    img: "https://www.seguridadprofesionalhoy.com/imagenes/2014/06/WDR-360.jpg",
+                    title: "Cámara Panorámica 360°",
+                    desc: "Vista completa sin puntos ciegos."
+                }
+            };
+
+            if (cameras[type]) {
+                image.src = cameras[type].img;
+                image.alt = cameras[type].title;
+                info.innerHTML = `
+                    <h2>${cameras[type].title}</h2>
+                    <p>${cameras[type].desc}</p>
+                `;
+            } else {
+                image.src = "";
+                image.alt = "Seleccione una cámara";
+                info.innerHTML = "<p>Seleccione un tipo de cámara para ver más información.</p>";
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Tipos de Cámaras de Seguridad</h1>
+        <p>Conoce las características de cada tipo de cámara</p>
+    </header>
+    <div class="container">
+        <!-- Imágenes a la izquierda -->
+        <div class="left">
+            <img id="image" src="" alt="Seleccione una cámara" />
+        </div>
+        <!-- Información a la derecha -->
+        <div class="right">
+            <h2>Seleccione un tipo de cámara</h2>
+            <select id="cameraType" onchange="showInfo()">
+                <option value="">-- Seleccionar --</option>
+                <option value="hd">Cámara HD</option>
+                <option value="ip">Cámara IP</option>
+                <option value="interiores">Cámaras para Interiores</option>
+                <option value="movimiento">Cámaras con Movimiento y Zoom</option>
+                <option value="vision_nocturna">Cámaras de Visión Nocturna</option>
+                <option value="analogicas">Cámaras Analógicas</option>
+                <option value="antivandalicas">Cámaras Antivandálicas</option>
+                <option value="wifi">Cámaras Wifi</option>
+                <option value="minidomo">Cámara Minidomo</option>
+                <option value="domo">Cámara Domo</option>
+                <option value="bala">Cámara Bala</option>
+                <option value="cubo">Cámara Cubo</option>
+                <option value="ptz">Cámara PTZ</option>
+                <option value="fija">Cámara Fija</option>
+                <option value="panoramica">Cámara Panorámica</option>
+            </select>
+            <div id="info">
+                <p>Seleccione un tipo de cámara para ver más información.</p>
+            </div>
+        </div>
+</body>
+</html>
+
+
+
+ 
